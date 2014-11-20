@@ -4,7 +4,7 @@
     "keywords": ["Stubborn"],
     "autoload": {
         "psr-0": {
-            "Something\\": "",
+            "Something\\": "examples",
             "Stubborn\\": "src"
         }
     },

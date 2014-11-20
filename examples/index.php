@@ -1,6 +1,6 @@
 <?php
 
-require realpath(__DIR__) . '/vendor/autoload.php';
+require realpath(__DIR__) . '/../vendor/autoload.php';
 
 /**
  * Like example
