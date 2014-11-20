@@ -31,6 +31,16 @@ class Like extends SomethingAbstract
         return new StubbornResponse('{status: true}', 201);
     }
 
+    public function getExceptionActionRequest(\Exception $exception)
+    {
+        switch(true){
+            // Default action is to just rethrow the Exception, we don't know what to do with it
+            case ($exception instanceof \Exception):
+            default:
+                throw $exception;
+        }
+    }
+
     /**
      * @inheritdoc
      */

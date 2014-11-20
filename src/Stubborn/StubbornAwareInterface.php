@@ -28,4 +28,10 @@ interface StubbornAwareInterface
      * @return false|2|1|0
      */
     public function getHttpActionRequest(StubbornResponse $response);
+
+    /**
+     * @param \Exception $exception
+     * @return false|2|1|0
+     */
+    public function getExceptionActionRequest(\Exception $exception);
 }

@@ -26,4 +26,9 @@ class Upload extends SomethingAbstract
         // Cba checking the http code
         return false;
     }
+
+    public function getExceptionActionRequest(\Exception $exception)
+    {
+        return self::STOP_EVENT;
+    }
 }
