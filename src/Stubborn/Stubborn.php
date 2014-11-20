@@ -29,14 +29,23 @@ class Stubborn
         $retries = 0;
 
         while($retry === true){
-            // Run the 'callback' the user wants
-            $response = $this->stubborn->run();
+            $response = null;
+            $action = null;
+
+            try{
+                // Run the 'callback' the user wants
+                $response = $this->stubborn->run();
+            }catch(\Exception $e){
+                $action = $this->stubborn->getExceptionActionRequest($e);
+            }
 
             // Did we get a StubbornResponse back?
-            if($response instanceof StubbornResponse){
+            if((isset($response)) && ($response instanceof StubbornResponse)){
                 // Lets check our HTTP Code, do we need to do anything?
                 $action = $this->stubborn->getHttpActionRequest($response);
+            }
 
+            if(isset($action)){
                 // No action is required
                 if($action === false){
                     return $response;
@@ -65,9 +74,11 @@ class Stubborn
             }
 
             if($retries >= $maxRetries){
-                //throw new Exception\TooManyRetriesException();
+                throw new Exception\TooManyRetriesException(get_class($this->stubborn) . '->run() has reached the maximum allowed retries.');
             }
         }
+
+        return null;
     }
 
     /**
