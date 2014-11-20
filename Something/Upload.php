@@ -2,7 +2,7 @@
 
 namespace Something;
 
-use Stubborn\StubbornResponse;
+use Stubborn\StubbornResponseInterface;
 
 class Upload extends SomethingAbstract
 {
@@ -21,7 +21,7 @@ class Upload extends SomethingAbstract
     /**
      * @inheritdoc
      */
-    public function getHttpActionRequest(StubbornResponse $response)
+    public function getHttpActionRequest(StubbornResponseInterface $response)
     {
         // Cba checking the http code
         return false;

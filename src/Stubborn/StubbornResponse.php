@@ -2,7 +2,7 @@
 
 namespace Stubborn;
 
-class StubbornResponse
+class StubbornResponse implements StubbornResponseInterface
 {
 
     /**
@@ -16,17 +16,21 @@ class StubbornResponse
     private $httpCode;
 
     /**
-     * @param mixed $data
-     * @param int $httpCode
+     * @var int
+     */
+    private $retryCount;
+
+    /**
+     * @inheritdoc
      */
     public function __construct($data, $httpCode)
     {
         $this->data = $data;
-        $this->httpCode = $httpCode;
+        $this->httpCode = (int)$httpCode;
     }
 
     /**
-     * @return mixed
+     * @inheritdoc
      */
     public function getData()
     {
@@ -34,10 +38,26 @@ class StubbornResponse
     }
 
     /**
-     * @return int
+     * @inheritdoc
      */
     public function getHttpCode()
     {
         return $this->httpCode;
+    }
+
+    /**
+     * @param int $retryCount
+     */
+    public function setRetryCount($retryCount)
+    {
+        $this->retryCount = (int)$retryCount;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRetryCount()
+    {
+        return $this->retryCount;
     }
 }

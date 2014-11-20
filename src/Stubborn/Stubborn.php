@@ -41,7 +41,7 @@ class Stubborn
             }
 
             // Did we get a StubbornResponse back?
-            if((isset($response)) && ($response instanceof StubbornResponse)){
+            if((isset($response)) && ($response instanceof StubbornResponseInterface)){
                 // Lets check our HTTP Code, do we need to do anything?
                 $action = $this->stubborn->getHttpActionRequest($response);
             }
@@ -49,6 +49,8 @@ class Stubborn
             if(isset($action)){
                 // No action is required
                 if($action === false){
+                    $response->setRetryCount($retries);
+
                     return $response;
                 }
 

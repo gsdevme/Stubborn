@@ -24,10 +24,10 @@ interface StubbornAwareInterface
     public function run();
 
     /**
-     * @param StubbornResponse $response
+     * @param StubbornResponseInterface $response
      * @return false|2|1|0
      */
-    public function getHttpActionRequest(StubbornResponse $response);
+    public function getHttpActionRequest(StubbornResponseInterface $response);
 
     /**
      * @param \Exception $exception

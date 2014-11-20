@@ -2,6 +2,7 @@
 
 namespace Something;
 
+use Stubborn\StubbornResponseInterface;
 use Stubborn\StubbornResponse;
 
 class Like extends SomethingAbstract
@@ -44,7 +45,7 @@ class Like extends SomethingAbstract
     /**
      * @inheritdoc
      */
-    public function getHttpActionRequest(StubbornResponse $response)
+    public function getHttpActionRequest(StubbornResponseInterface $response)
     {
         switch($response->getHttpCode()){
             case 404:
