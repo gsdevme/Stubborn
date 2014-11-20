@@ -1,0 +1,11 @@
+{
+    "name":"gsdevme/stubborn",
+    "description":"Concept taken from Stubborn https://github.com/derekdowling/stubborn",
+    "keywords": ["Stubborn"],
+    "autoload": {
+        "psr-0": {
+            "Something\\": "",
+            "Stubborn\\": "src"
+        }
+    }
+}
