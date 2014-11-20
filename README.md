@@ -62,4 +62,9 @@ class StubbornDummyApi implements \Stubborn\StubbornAwareInterface
 $dummyApiRequest = new StubbornDummyApi('123456789qwerty');
 $stubborn = new Stubborn\Stubborn($dummyApiRequest);
 $result = $stubborn->run();
+
+if($result instanceOf \Stubborn\StubbornResponseInterface){
+    var_dump($result->getHttpCode());
+    var_dump($result->getData());
+}
 ```
