@@ -1,9 +1,11 @@
-## Stubborn
+## WIP: Stubborn
 
 [![Build Status](https://travis-ci.org/gsdevme/Stubborn.svg?branch=master)](https://travis-ci.org/gsdevme/Stubborn)
 
-#### Idea taken from
-http://www.reddit.com/r/PHP/comments/2mqyxw/a_little_library_i_wrote_for_dealing_with/
+#### Credit
+I was browsing reddit and came across a post.. I like the concept but thought I could improve on the implementation.. so I did
+Reddit: http://www.reddit.com/r/PHP/comments/2mqyxw/a_little_library_i_wrote_for_dealing_with/
+Original Developer: https://github.com/derekdowling/stubborn
 
 ### Concept
 For each API vendor (e.g. Facebook, Twitter, Dropbox) have the requests implement StubbornAwareInterface and throw the class into Stubborn, You can implement the methods to handle the API oddities
@@ -60,7 +62,7 @@ class StubbornDummyApi implements \Stubborn\StubbornAwareInterface
 }
 
 $dummyApiRequest = new StubbornDummyApi('123456789qwerty');
-$stubborn = new Stubborn\Stubborn($dummyApiRequest);
+$stubborn = new \Stubborn\Stubborn($dummyApiRequest);
 $result = $stubborn->run();
 
 if($result instanceOf \Stubborn\StubbornResponseInterface){
