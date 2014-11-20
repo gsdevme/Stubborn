@@ -48,6 +48,12 @@ class Stubborn
 
             // Fallback to checking if we got a Retry or Stop
             switch($response){
+                case StubbornAwareInterface::RETRY_WAIT_EVENT:
+                    // Break the switch and continue the loop
+                    $retries += 1;
+
+                    $this->sleep($this->getRetryWaitSeconds());
+                    break;
                 case StubbornAwareInterface::RETRY_EVENT:
                     // Break the switch and continue the loop
                     $retries += 1;
@@ -62,5 +68,29 @@ class Stubborn
                 //throw new Exception\TooManyRetriesException();
             }
         }
+    }
+
+    /**
+     * Quickly checks if zero, Im not sure if PHP handles sleep(0) well.. so just done this for now
+     *
+     * @param $v
+     */
+    private function sleep($v)
+    {
+        if($v > 0){
+            sleep($v);
+        }
+    }
+
+    /**
+     * @return int
+     */
+    private function getRetryWaitSeconds()
+    {
+        if($this->stubborn->getRetryWaitSeconds() !== null){
+            return (int)$this->stubborn->getRetryWaitSeconds();
+        }
+
+        return 0;
     }
 }

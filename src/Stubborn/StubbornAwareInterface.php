@@ -6,6 +6,7 @@ interface StubbornAwareInterface
 {
     const STOP_EVENT = 0;
     const RETRY_EVENT = 1;
+    const RETRY_WAIT_EVENT = 2;
 
     /**
      * @return int|null
@@ -13,13 +14,18 @@ interface StubbornAwareInterface
     public function getRetryNumber();
 
     /**
-     * @return StubbornResponse|1|0|null
+     * @return int|null
+     */
+    public function getRetryWaitSeconds();
+
+    /**
+     * @return StubbornResponse|2|1|0|null
      */
     public function run();
 
     /**
      * @param StubbornResponse $response
-     * @return false|1|0
+     * @return false|2|1|0
      */
     public function getHttpActionRequest(StubbornResponse $response);
 }
