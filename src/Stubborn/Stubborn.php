@@ -20,6 +20,7 @@ class Stubborn
 
     /**
      * @return StubbornResponse|null
+     * @throws Exception\TooManyRetriesException|Exception
      */
     public function run()
     {
