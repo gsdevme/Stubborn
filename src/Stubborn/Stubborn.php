@@ -41,7 +41,7 @@ class Stubborn
             }
 
             // Did we get a StubbornResponse back?
-            if((isset($response)) && ($response instanceof StubbornResponseInterface)){
+            if($response instanceof StubbornResponseInterface){
                 // Lets check our HTTP Code, do we need to do anything?
                 $action = $this->stubborn->getHttpActionRequest($response);
             }
