@@ -8,6 +8,7 @@ interface StubbornResponseInterface
     /**
      * @param mixed $data
      * @param int $httpCode
+     * @return void
      */
     public function __construct($data, $httpCode);
 
@@ -21,6 +22,13 @@ interface StubbornResponseInterface
      */
     public function getHttpCode();
 
+    /**
+     * @return void
+     */
     public function setRetryCount($retryCount);
+
+    /**
+     * @return integer
+     */
     public function getRetryCount();
 }
