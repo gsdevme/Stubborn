@@ -19,19 +19,19 @@ interface StubbornAwareInterface
     public function getRetryWaitSeconds();
 
     /**
-     * @return StubbornResponse|self::RETRY_WAIT_ACTION|self::RETRY_ACTION|self::STOP_ACTION|null
+     * @return StubbornResponse|StubbornAwareInterface::RETRY_WAIT_ACTION|StubbornAwareInterface::RETRY_ACTION|StubbornAwareInterface::STOP_ACTION|null
      */
     public function run();
 
     /**
      * @param StubbornResponseInterface $response
-     * @return false|self::RETRY_WAIT_ACTION|self::RETRY_ACTION|self::STOP_ACTION
+     * @return false|StubbornAwareInterface::RETRY_WAIT_ACTION|StubbornAwareInterface::RETRY_ACTION|StubbornAwareInterface::STOP_ACTION
      */
     public function getHttpActionRequest(StubbornResponseInterface $response);
 
     /**
      * @param \Exception $exception
-     * @return false|self::RETRY_WAIT_ACTION|self::RETRY_ACTION|self::STOP_ACTION
+     * @return false|StubbornAwareInterface::RETRY_WAIT_ACTION|StubbornAwareInterface::RETRY_ACTION|StubbornAwareInterface::STOP_ACTION
      */
     public function getExceptionActionRequest(\Exception $exception);
 }
