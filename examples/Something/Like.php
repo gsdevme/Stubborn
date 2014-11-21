@@ -2,8 +2,8 @@
 
 namespace Something;
 
-use Stubborn\StubbornResponseInterface;
 use Stubborn\StubbornResponse;
+use Stubborn\StubbornResponseInterface;
 
 class Like extends SomethingAbstract
 {
@@ -18,7 +18,7 @@ class Like extends SomethingAbstract
     public function __construct($apiToken, $id)
     {
         $this->apiToken = $apiToken;
-        $this->id = $id;
+        $this->id       = $id;
     }
 
     /**
@@ -34,7 +34,7 @@ class Like extends SomethingAbstract
 
     public function getExceptionActionRequest(\Exception $exception)
     {
-        switch(true){
+        switch (true) {
             // Default action is to just rethrow the Exception, we don't know what to do with it
             case ($exception instanceof \Exception):
             default:
@@ -47,7 +47,7 @@ class Like extends SomethingAbstract
      */
     public function getHttpActionRequest(StubbornResponseInterface $response)
     {
-        switch($response->getHttpCode()){
+        switch ($response->getHttpCode()) {
             case 404:
                 return self::RETRY_ACTION;
             case 200:

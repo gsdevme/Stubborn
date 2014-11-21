@@ -2,10 +2,8 @@
 
     namespace StubbornTest;
 
-    use Stubborn\Stubborn;
     use PHPUnit_Framework_TestCase;
-    use PHPUnit_Framework_Error;
-    use stdClass;
+    use Stubborn\Stubborn;
     use Stubborn\StubbornAwareInterface;
 
     class StubbornTest extends PHPUnit_Framework_TestCase

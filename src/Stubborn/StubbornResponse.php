@@ -25,7 +25,7 @@ class StubbornResponse implements StubbornResponseInterface
      */
     public function __construct($data, $httpCode)
     {
-        $this->data = $data;
+        $this->data     = $data;
         $this->httpCode = (int)$httpCode;
     }
 

@@ -25,27 +25,27 @@ class Stubborn
     public function run()
     {
         $maxRetries = $this->stubborn->getRetryNumber();
-        $retries = 0;
+        $retries    = 0;
 
-        while(true){
+        while (true) {
             $response = null;
-            $action = null;
+            $action   = null;
 
-            try{
+            try {
                 // Run the 'callback' the user wants
                 $response = $this->stubborn->run();
-            }catch(\Exception $e){
+            } catch (\Exception $e) {
                 $action = $this->stubborn->getExceptionActionRequest($e);
             }
 
             // Did we get a StubbornResponse back?
-            if($response instanceof StubbornResponseInterface){
+            if ($response instanceof StubbornResponseInterface) {
                 // Lets check our HTTP Code, do we need to do anything?
                 $action = $this->stubborn->getHttpActionRequest($response);
             }
 
-            if(isset($action)){
-                if($action === false){
+            if (isset($action)) {
+                if ($action === false) {
                     $response->setRetryCount($retries);
 
                     return $response;
@@ -55,11 +55,11 @@ class Stubborn
                 $response = $action;
             }
 
-            if($this->enquireForFallbackResponse($response, $retries) === false){
+            if ($this->enquireForFallbackResponse($response, $retries) === false) {
                 return null;
             }
 
-            if($retries > $maxRetries){
+            if ($retries > $maxRetries) {
                 throw new Exception\TooManyRetriesException(get_class($this->stubborn) . '->run() has reached the maximum allowed retries.');
             }
         }
@@ -72,7 +72,7 @@ class Stubborn
      */
     private function enquireForFallbackResponse($response, &$retries)
     {
-        switch($response){
+        switch ($response) {
             case StubbornAwareInterface::RETRY_WAIT_ACTION:
                 $retries += 1;
 
@@ -96,7 +96,7 @@ class Stubborn
      */
     private function sleep($v)
     {
-        if($v > 0){
+        if ($v > 0) {
             sleep($v);
         }
     }
@@ -106,7 +106,7 @@ class Stubborn
      */
     private function getRetryWaitSeconds()
     {
-        if($this->stubborn->getRetryWaitSeconds() !== null){
+        if ($this->stubborn->getRetryWaitSeconds() !== null) {
             return (int)$this->stubborn->getRetryWaitSeconds();
         }
 

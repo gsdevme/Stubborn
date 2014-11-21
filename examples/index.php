@@ -8,7 +8,7 @@ require realpath(__DIR__) . '/../vendor/autoload.php';
 $like = new Something\Like('blagbla83eq33b3r', 235);
 
 $stubborn = new Stubborn\Stubborn($like);
-$result = $stubborn->run();
+$result   = $stubborn->run();
 
 var_dump($result);
 
@@ -19,6 +19,6 @@ var_dump($result);
 $upload = new Something\Upload();
 
 $stubborn = new Stubborn\Stubborn($upload);
-$result = $stubborn->run();
+$result   = $stubborn->run();
 
 var_dump($result);
