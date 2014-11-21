@@ -49,7 +49,7 @@ class StubbornDummyApi implements \Stubborn\StubbornAwareInterface
         switch($response->getHttpCode()){
             case 501:
             case 408:
-                return self::RETRY_EVENT;
+                return self::RETRY_ACTION;
             default:
                 return false;
         }
