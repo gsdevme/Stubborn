@@ -1,0 +1,19 @@
+filter:
+    excluded_paths:
+        - 'vendor/*'
+        - 'tests/*'
+        - 'examples/*'
+    paths: {  }
+tools:
+    php_analyzer:
+        enabled: true
+        extensions:
+            - php
+        dependency_paths: {  }
+        filter:
+            excluded_paths:
+                - 'vendor/*'
+                - 'tests/*'
+                - 'examples/*'
+            paths: {  }
+        path_configs: {  }
