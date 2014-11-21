@@ -17,3 +17,31 @@ tools:
                 - 'examples/*'
             paths: {  }
         path_configs: {  }
+    php_sim:
+        enabled: true
+        min_mass: 16
+        filter:
+            excluded_paths:
+                - 'vendor/*'
+                - 'tests/*'
+                - 'examples/*'
+            paths: {  }
+    php_pdepend:
+        enabled: true
+        configuration_file: null
+        suffixes:
+            - php
+        excluded_dirs: {  }
+        filter:
+            excluded_paths:
+                - 'vendor/*'
+                - 'tests/*'
+                - 'examples/*'
+            paths: {  }
+    external_code_coverage:
+        filter:
+            excluded_paths:
+                - 'vendor/*'
+                - 'tests/*'
+                - 'examples/*'
+            paths: {  }
