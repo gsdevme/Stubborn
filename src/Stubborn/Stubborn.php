@@ -92,7 +92,7 @@ class Stubborn
     /**
      * Quickly checks if zero, Im not sure if PHP handles sleep(0) well.. so just done this for now
      *
-     * @param $v
+     * @param integer $v
      */
     private function sleep($v)
     {
