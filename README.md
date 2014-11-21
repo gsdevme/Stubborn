@@ -1,6 +1,10 @@
 ## WIP: Stubborn
 
+### Travis
 [![Build Status](https://travis-ci.org/gsdevme/Stubborn.svg?branch=master)](https://travis-ci.org/gsdevme/Stubborn)
+
+### Scrutinizer
+[![Build Status](https://scrutinizer-ci.com/g/gsdevme/Stubborn/badges/build.png?b=master)](https://scrutinizer-ci.com/g/gsdevme/Stubborn/build-status/master)
 
 #### Credit
 I was browsing reddit and came across a post.. I like the concept but thought I could improve on the implementation.. so I did

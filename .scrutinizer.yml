@@ -38,3 +38,12 @@ tools:
                 - 'tests/*'
                 - 'examples/*'
             paths: {  }
+    php:
+        code_rating: true
+        duplication: true
+        filter:
+            excluded_paths:
+                - 'vendor/*'
+                - 'tests/*'
+                - 'examples/*'
+            paths: {  }
