@@ -38,10 +38,3 @@ tools:
                 - 'tests/*'
                 - 'examples/*'
             paths: {  }
-    external_code_coverage:
-        filter:
-            excluded_paths:
-                - 'vendor/*'
-                - 'tests/*'
-                - 'examples/*'
-            paths: {  }
