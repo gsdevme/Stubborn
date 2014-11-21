@@ -49,7 +49,7 @@ class Like extends SomethingAbstract
     {
         switch($response->getHttpCode()){
             case 404:
-                return self::RETRY_EVENT;
+                return self::RETRY_ACTION;
             case 200:
             case 201:
             default:

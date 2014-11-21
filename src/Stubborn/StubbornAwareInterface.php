@@ -4,9 +4,9 @@ namespace Stubborn;
 
 interface StubbornAwareInterface
 {
-    const STOP_EVENT = 0;
-    const RETRY_EVENT = 1;
-    const RETRY_WAIT_EVENT = 2;
+    const STOP_ACTION = 0;
+    const RETRY_ACTION = 1;
+    const RETRY_WAIT_ACTION = 2;
 
     /**
      * @return int|null

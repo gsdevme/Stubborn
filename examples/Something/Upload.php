@@ -15,7 +15,7 @@ class Upload extends SomethingAbstract
         /**
          * Lets say in this example the API fucked up and we want to stop it
          */
-        return self::STOP_EVENT;
+        return self::STOP_ACTION;
     }
 
     /**
@@ -29,6 +29,6 @@ class Upload extends SomethingAbstract
 
     public function getExceptionActionRequest(\Exception $exception)
     {
-        return self::STOP_EVENT;
+        return self::STOP_ACTION;
     }
 }

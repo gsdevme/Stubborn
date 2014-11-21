@@ -60,23 +60,23 @@ class Stubborn
 
             // Fallback to checking if we got a Retry or Stop
             switch($response){
-                case StubbornAwareInterface::RETRY_WAIT_EVENT:
+                case StubbornAwareInterface::RETRY_WAIT_ACTION:
                     // Break the switch and continue the loop
                     $retries += 1;
 
                     $this->sleep($this->getRetryWaitSeconds());
                     break;
-                case StubbornAwareInterface::RETRY_EVENT:
+                case StubbornAwareInterface::RETRY_ACTION:
                     // Break the switch and continue the loop
                     $retries += 1;
                     break;
-                case StubbornAwareInterface::STOP_EVENT:
+                case StubbornAwareInterface::STOP_ACTION:
                 default:
                     // Return the function and stop the loop
                     return null;
             }
 
-            if($retries >= $maxRetries){
+            if($retries > $maxRetries){
                 throw new Exception\TooManyRetriesException(get_class($this->stubborn) . '->run() has reached the maximum allowed retries.');
             }
         }
