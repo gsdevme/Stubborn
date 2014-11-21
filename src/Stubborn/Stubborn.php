@@ -25,11 +25,9 @@ class Stubborn
     public function run()
     {
         $maxRetries = $this->stubborn->getRetryNumber();
-
-        $retry = true;
         $retries = 0;
 
-        while($retry === true){
+        while(true){
             $response = null;
             $action = null;
 
@@ -47,7 +45,6 @@ class Stubborn
             }
 
             if(isset($action)){
-                // No action is required
                 if($action === false){
                     $response->setRetryCount($retries);
 
@@ -58,30 +55,38 @@ class Stubborn
                 $response = $action;
             }
 
-            // Fallback to checking if we got a Retry or Stop
-            switch($response){
-                case StubbornAwareInterface::RETRY_WAIT_ACTION:
-                    // Break the switch and continue the loop
-                    $retries += 1;
-
-                    $this->sleep($this->getRetryWaitSeconds());
-                    break;
-                case StubbornAwareInterface::RETRY_ACTION:
-                    // Break the switch and continue the loop
-                    $retries += 1;
-                    break;
-                case StubbornAwareInterface::STOP_ACTION:
-                default:
-                    // Return the function and stop the loop
-                    return null;
+            if($this->enquireForFallbackResponse($response, $retries) === false){
+                return null;
             }
 
             if($retries > $maxRetries){
                 throw new Exception\TooManyRetriesException(get_class($this->stubborn) . '->run() has reached the maximum allowed retries.');
             }
         }
+    }
 
-        return null;
+    /**
+     * @param $response
+     * @param int $retries
+     * @return bool
+     */
+    private function enquireForFallbackResponse($response, &$retries)
+    {
+        switch($response){
+            case StubbornAwareInterface::RETRY_WAIT_ACTION:
+                $retries += 1;
+
+                $this->sleep($this->getRetryWaitSeconds());
+                break;
+            case StubbornAwareInterface::RETRY_ACTION:
+                $retries += 1;
+                break;
+            case StubbornAwareInterface::STOP_ACTION:
+            default:
+                return false;
+        }
+
+        return true;
     }
 
     /**
