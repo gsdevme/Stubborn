@@ -26,6 +26,9 @@ abstract class StubbornAbstract implements StubbornAwareInterface
         return 5;
     }
 
+    /**
+     * @inheritdoc
+     */
     public function getExceptionActionRequest(\Exception $exception)
     {
         // Default action is to just rethrow the Exception, we don't know what to do with it

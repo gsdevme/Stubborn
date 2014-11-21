@@ -36,7 +36,7 @@ class StubbornDummyApi implements \Stubborn\StubbornAwareInterface
     public function getRetryWaitSeconds()
     {
         // wait 5 seconds after each try
-        return 5;
+        return 10;
     }
 
     public function run()
@@ -62,7 +62,15 @@ class StubbornDummyApi implements \Stubborn\StubbornAwareInterface
 
     public function getExceptionActionRequest(\Exception $exception)
     {
-        return false;
+        switch(true){
+            // If UnexpectedValueException retry wait.. maybe got something odd back from the API
+            case ($exception instanceof \UnexpectedValueException):
+                return self::RETRY_WAIT_ACTION;
+            // Default action is to just rethrow the Exception, we don't know what to do with it
+            case ($exception instanceof \Exception):
+            default:
+                throw $exception;
+        }
     }
 }
 
