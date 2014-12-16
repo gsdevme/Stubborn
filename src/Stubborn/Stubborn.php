@@ -38,11 +38,7 @@ class Stubborn
                 $action = $this->stubborn->getExceptionActionRequest($e);
             }
 
-            // Did we get a StubbornResponse back?
-            if ($response instanceof StubbornResponseInterface) {
-                // Lets check our HTTP Code, do we need to do anything?
-                $action = $this->stubborn->getHttpActionRequest($response);
-            }
+            $this->responseHandler($response, $action);
 
             if (isset($action)) {
                 if ($action === false) {
@@ -55,7 +51,7 @@ class Stubborn
                 $response = $action;
             }
 
-            if ($this->enquireForFallbackResponse($response, $retries) === false) {
+            if ($this->fallbackResponseHandler($response, $retries) === false) {
                 return null;
             }
 
@@ -66,11 +62,26 @@ class Stubborn
     }
 
     /**
+     * Response handler, assigns action if required
+     *
+     * @param $response
+     * @param $action
+     */
+    private function responseHandler($response, &$action)
+    {
+        if ($response instanceof StubbornResponseInterface) {
+            $action = $this->stubborn->getHttpActionRequest($response);
+        }
+    }
+
+    /**
+     * Fallback response handler if no action is required
+     *
      * @param $response
      * @param int $retries
      * @return bool
      */
-    private function enquireForFallbackResponse($response, &$retries)
+    private function fallbackResponseHandler($response, &$retries)
     {
         switch ($response) {
             case StubbornAwareInterface::RETRY_WAIT_ACTION:
