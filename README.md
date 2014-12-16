@@ -6,6 +6,7 @@
 ### Scrutinizer
 [![Build Status](https://scrutinizer-ci.com/g/gsdevme/Stubborn/badges/build.png?b=master)](https://scrutinizer-ci.com/g/gsdevme/Stubborn/build-status/master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/gsdevme/Stubborn/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/gsdevme/Stubborn/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/gsdevme/Stubborn/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/gsdevme/Stubborn/?branch=master)
 
 #### Credit
 I was browsing reddit and came across a post.. I like the concept but thought I could improve on the implementation.. so I did
