@@ -20,34 +20,24 @@ class Stubborn
 
     /**
      * @return StubbornResponse|null
-     * @throws Exception\TooManyRetriesException|Exception
+     * @throws Exception\TooManyRetriesException
      */
     public function run()
     {
-        $retries    = 0;
+        $retries = 0;
 
         while (true) {
             $response = null;
             $action   = null;
 
             try {
-                // Run the 'callback' the user wants
                 $response = $this->stubborn->run();
-            } catch (\Exception $e) {
-                $action = $this->stubborn->getExceptionActionRequest($e);
+            } catch (\Exception $exception) {
+                $action = $this->stubborn->getExceptionActionRequest($exception);
             }
 
-            $this->responseHandler($response, $action);
-
-            if (isset($action)) {
-                if ($action === false) {
-                    $response->setRetryCount($retries);
-
-                    return $response;
-                }
-
-                // Assign the action to the response, this will drop into the code below
-                $response = $action;
+            if ($this->responseHandler($response, $action, $retries) instanceof StubbornResponseInterface) {
+                return $response;
             }
 
             if ($this->fallbackResponseHandler($response, $retries) === StubbornAwareInterface::STOP_ACTION) {
@@ -57,21 +47,34 @@ class Stubborn
     }
 
     /**
-     * Response handler, assigns action if required
-     *
      * @param $response
      * @param $action
+     * @param $retries
+     * @return false|StubbornResponseInterface
      */
-    private function responseHandler($response, &$action)
+    private function responseHandler(&$response, &$action, $retries)
     {
         if ($response instanceof StubbornResponseInterface) {
             $action = $this->stubborn->getHttpActionRequest($response);
         }
+
+        if (isset($action)) {
+            if ($action === false) {
+                $response->setRetryCount($retries);
+
+                return $response;
+            }
+
+            $response = $action;
+        }
+
+        return false;
     }
 
     /**
      * @param $response
      * @param $retries
+     * @return int
      * @throws Exception\TooManyRetriesException
      */
     private function fallbackResponseHandler($response, &$retries)

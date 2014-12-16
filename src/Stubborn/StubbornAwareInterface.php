@@ -4,8 +4,8 @@ namespace Stubborn;
 
 interface StubbornAwareInterface
 {
-    const STOP_ACTION = 0;
-    const RETRY_ACTION = 1;
+    const STOP_ACTION       = 0;
+    const RETRY_ACTION      = 1;
     const RETRY_WAIT_ACTION = 2;
 
     /**
@@ -19,19 +19,19 @@ interface StubbornAwareInterface
     public function getRetryWaitSeconds();
 
     /**
-     * @return StubbornResponse|StubbornAwareInterface::RETRY_WAIT_ACTION|StubbornAwareInterface::RETRY_ACTION|StubbornAwareInterface::STOP_ACTION|null
+     * @return StubbornResponse|int|null
      */
     public function run();
 
     /**
      * @param StubbornResponseInterface $response
-     * @return false|StubbornAwareInterface::RETRY_WAIT_ACTION|StubbornAwareInterface::RETRY_ACTION|StubbornAwareInterface::STOP_ACTION
+     * @return false|int
      */
     public function getHttpActionRequest(StubbornResponseInterface $response);
 
     /**
      * @param \Exception $exception
-     * @return false|StubbornAwareInterface::RETRY_WAIT_ACTION|StubbornAwareInterface::RETRY_ACTION|StubbornAwareInterface::STOP_ACTION
+     * @return false|int
      */
     public function getExceptionActionRequest(\Exception $exception);
 }
