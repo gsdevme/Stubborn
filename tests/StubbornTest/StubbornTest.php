@@ -3,6 +3,7 @@
     namespace StubbornTest;
 
     use PHPUnit_Framework_TestCase;
+    use SebastianBergmann\Exporter\Exception;
     use Stubborn\Stubborn;
     use Stubborn\StubbornAwareInterface;
 
@@ -74,6 +75,29 @@
             $stubbornAwareObject->expects($this->exactly(1))
                 ->method('run')
                 ->will($this->returnValue(StubbornAwareInterface::STOP_ACTION));
+
+            $stubborn = new Stubborn($stubbornAwareObject);
+
+            $this->assertNull($stubborn->run());
+        }
+
+        public function testExceptionActionRequest()
+        {
+            $stubbornAwareObject = $this->getStubbornMock();
+
+            // Setup $stubbornAwareObject
+            $stubbornAwareObject->method('getRetryNumber')->will($this->returnValue(5));
+            $stubbornAwareObject->method('getRetryWaitSeconds')->will($this->returnValue(0));
+            $stubbornAwareObject->method('getHttpActionRequest')->will($this->returnValue(false));
+            $stubbornAwareObject->method('getExceptionActionRequest')->will($this->returnCallback(function () {
+                return StubbornAwareInterface::STOP_ACTION;
+            }));
+
+            $stubbornAwareObject->expects($this->exactly(1))
+                ->method('run')
+                ->will($this->returnCallback(function () {
+                    throw new Exception();
+                }));
 
             $stubborn = new Stubborn($stubbornAwareObject);
 
