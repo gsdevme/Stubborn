@@ -5,6 +5,7 @@ filter:
         - 'examples/*'
     paths: {  }
 tools:
+    external_code_coverage: true
     php_analyzer:
         enabled: true
         extensions:
