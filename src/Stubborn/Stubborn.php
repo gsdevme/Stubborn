@@ -51,7 +51,7 @@ class Stubborn
                 $response = $action;
             }
 
-            if ($this->fallbackResponseHandler($response, $retries) === false) {
+            if ($this->fallbackResponseHandler($response, $retries) === StubbornAwareInterface::STOP_ACTION) {
                 return null;
             }
 
@@ -78,8 +78,8 @@ class Stubborn
      * Fallback response handler if no action is required
      *
      * @param $response
-     * @param int $retries
-     * @return bool
+     * @param $retries
+     * @return bool|int
      */
     private function fallbackResponseHandler($response, &$retries)
     {
@@ -94,7 +94,7 @@ class Stubborn
                 break;
             case StubbornAwareInterface::STOP_ACTION:
             default:
-                return false;
+                return StubbornAwareInterface::STOP_ACTION;
         }
 
         return true;
