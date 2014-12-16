@@ -24,7 +24,6 @@ class Stubborn
      */
     public function run()
     {
-        $maxRetries = $this->stubborn->getRetryNumber();
         $retries    = 0;
 
         while (true) {
@@ -54,10 +53,6 @@ class Stubborn
             if ($this->fallbackResponseHandler($response, $retries) === StubbornAwareInterface::STOP_ACTION) {
                 return null;
             }
-
-            if ($retries > $maxRetries) {
-                throw new Exception\TooManyRetriesException(get_class($this->stubborn) . '->run() has reached the maximum allowed retries.');
-            }
         }
     }
 
@@ -75,11 +70,9 @@ class Stubborn
     }
 
     /**
-     * Fallback response handler if no action is required
-     *
      * @param $response
      * @param $retries
-     * @return bool|int
+     * @throws Exception\TooManyRetriesException
      */
     private function fallbackResponseHandler($response, &$retries)
     {
@@ -97,7 +90,9 @@ class Stubborn
                 return StubbornAwareInterface::STOP_ACTION;
         }
 
-        return true;
+        if ($retries > $this->stubborn->getRetryNumber()) {
+            throw new Exception\TooManyRetriesException(get_class($this->stubborn) . '->run() has reached the maximum allowed retries.');
+        }
     }
 
     /**
