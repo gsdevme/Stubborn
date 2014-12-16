@@ -85,7 +85,6 @@ class Stubborn
             case StubbornAwareInterface::RETRY_ACTION:
                 $retries += 1;
                 break;
-            case StubbornAwareInterface::STOP_ACTION:
             default:
                 return StubbornAwareInterface::STOP_ACTION;
         }
